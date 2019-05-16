@@ -3,7 +3,7 @@ title: "Tweets"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
-    self_contained: FALSE
+    self_contained: TRUE
     vertical_layout: fill
 ---
 
