@@ -1,6 +1,7 @@
 name: archive
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 1 * *'  # every 1st of the month
 
