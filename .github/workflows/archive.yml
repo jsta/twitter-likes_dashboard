@@ -6,7 +6,7 @@ on:
     - cron: '0 0 1 * *'  # every 1st of the month
 
 jobs:
-  londonmapbot-post:
+  archive:
     runs-on: macOS-latest
     env:
       TWITTER_CONSUMER_API_KEY: ${{ secrets.TWITTER_CONSUMER_API_KEY }}
