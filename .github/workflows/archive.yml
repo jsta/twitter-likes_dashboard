@@ -18,7 +18,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
       - name: Install R packages
-        run: Rscript -e 'install.packages(c("rtweet", "DT", "dplyr"), dependencies = TRUE)'
+        run: Rscript -e 'install.packages(c("rtweet", "DT", "dplyr", "flexdashboard"), dependencies = TRUE)'
       - name: Create archive
         run: Rscript scripts/get_tweets.R
       - name: Render data table
