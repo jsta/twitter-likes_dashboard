@@ -36,4 +36,5 @@ res <- dplyr::bind_rows(dt2, dt)
 
 
 outfile <- file.path("data", paste0(Sys.Date(), "_jjstache_likes.rds"))
+print(outfile)
 saveRDS(res, outfile)

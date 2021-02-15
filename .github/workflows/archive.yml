@@ -30,4 +30,4 @@ jobs:
           git push
 
 # - name: Render data table
-#         run: Rscript -e
+#   run: Rscript -e "rmarkdown::render('index.Rmd')"
