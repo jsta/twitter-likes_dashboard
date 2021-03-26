@@ -1,7 +1,9 @@
 # ---- setup ----
 library(rtweet)
 
-if(!grep("comp", Sys.info()["nodename"])){ # not on jsta local system
+
+
+if(!is.null(grep("comp", Sys.info()["nodename"]))){ # not on jsta local system
   dashboard_token <- rtweet::create_token(
     consumer_key =    Sys.getenv("TWITTER_CONSUMER_API_KEY"),
     consumer_secret = Sys.getenv("TWITTER_CONSUMER_API_SECRET"),
