@@ -1,3 +1,18 @@
+library(rtweet)
+
+read_latest <- function(){
+  archives <- list.files("data", pattern = "*likes.rds",
+                         full.names = TRUE, include.dirs = TRUE)
+  dates <- sapply(archives,
+                  function(x) strsplit(x, "_")[[1]][1])
+  dates <- as.Date(
+    sapply(dates, function(x) substring(x, nchar(x)-9, nchar(x))))
+
+  dt <- readRDS(archives[which.max(dates)])
+  dt <- data.frame(dt)
+  dt
+}
+
 # ---- curate following ----
 followers <- get_followers("__jsta")
 
@@ -23,5 +38,6 @@ res <- dplyr::filter(bad_followees, (statuses_count < 3 &
                           is.na(profile_banner_url) &
                           is.na(profile_background_url) &
                           created_at < "2018-01-01"))
+res$name
 # View(res)
 sapply(res$user_id, function(x) rtweet::post_unfollow_user(x))
