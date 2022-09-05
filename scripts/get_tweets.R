@@ -10,6 +10,7 @@ if (!is.null(grep("comp", Sys.info()["nodename"]))) { # not on jsta local system
     access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
     access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
   )
+  auth_as(dashboard_token)
 } else {
   # auth_setup_default()
 }
