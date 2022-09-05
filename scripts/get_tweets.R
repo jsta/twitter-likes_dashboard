@@ -29,7 +29,7 @@ read_latest <- function(){
 outfile <- file.path("data", paste0(Sys.Date(), "_jjstache_likes.rds"))
 print(outfile)
 if(!file.exists(outfile)){
-  jjstache_likes <- get_favorites("__jsta", n = 1000)
+  jjstache_likes <- get_favorites("__jsta", n = 1000, token = dashboard_token)
   jjstache_likes <- jjstache_likes[
     order(jjstache_likes$created_at, decreasing = TRUE),]
 
