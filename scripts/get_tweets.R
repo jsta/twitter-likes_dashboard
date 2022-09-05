@@ -47,6 +47,7 @@ if (!file.exists(outfile)) {
   #   -mentions_user_id,
   #   -hashtags)
 
+  dt2$quoted_status_id <- as.character(dt2$quoted_status_id) 
   res <- dplyr::bind_rows(dt2, dt)
 
   saveRDS(res, outfile)
