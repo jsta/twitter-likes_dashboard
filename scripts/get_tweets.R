@@ -10,6 +10,8 @@ if(!is.null(grep("comp", Sys.info()["nodename"]))){ # not on jsta local system
     access_token =    Sys.getenv("TWITTER_ACCESS_TOKEN"),
     access_secret =   Sys.getenv("TWITTER_ACCESS_TOKEN_SECRET")
   )
+}else {
+  # auth_setup_default()
 }
 
 read_latest <- function(){
@@ -28,16 +30,16 @@ read_latest <- function(){
 # ---- get tweets ----
 outfile <- file.path("data", paste0(Sys.Date(), "_jjstache_likes.rds"))
 print(outfile)
-if(!file.exists(outfile)){
-  jjstache_likes <- get_favorites("__jsta", n = 1000, token = dashboard_token)
+if(!file.exists(outfile)) {
+  jjstache_likes <- get_favorites("__jsta", n = 1000)
   jjstache_likes <- jjstache_likes[
     order(jjstache_likes$created_at, decreasing = TRUE),]
 
   dt <- read_latest()
   i_archive_start <- ifelse( # in case i == 1 has been deleted (#6)
-    length(which(jjstache_likes$status_id == dt[1, "status_id"])) == 0,
-    which(jjstache_likes$status_id == dt[2, "status_id"]),
-    which(jjstache_likes$status_id == dt[1, "status_id"]))
+    length(which(jjstache_likes$id_str == dt[1, "status_id"])) == 0,
+    which(jjstache_likes$id_str == dt[2, "status_id"]),
+    which(jjstache_likes$id_str == dt[1, "status_id"]))
   dt2 <- jjstache_likes[1:i_archive_start,]
 
   dt2 <- dplyr::select(dt2, -media_url, -mentions_screen_name,
