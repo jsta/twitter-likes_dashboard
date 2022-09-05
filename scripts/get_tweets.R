@@ -12,7 +12,7 @@ if (!is.null(grep("comp", Sys.info()["nodename"]))) { # not on jsta local system
   )
   auth_as(dashboard_token)
 } else {
-  # auth_setup_default()
+  auth_setup_default()
 }
 
 read_latest <- function() {
@@ -43,9 +43,9 @@ if (!file.exists(outfile)) {
     which(jjstache_likes$id_str == dt[1, "status_id"]))
   dt2 <- jjstache_likes[1:i_archive_start, ]
 
-  dt2 <- dplyr::select(dt2, -media_url, -mentions_screen_name,
-    -mentions_user_id,
-    -hashtags)
+  # dt2 <- dplyr::select(dt2, -media_url, -mentions_screen_name,
+  #   -mentions_user_id,
+  #   -hashtags)
 
   res <- dplyr::bind_rows(dt2, dt)
 
