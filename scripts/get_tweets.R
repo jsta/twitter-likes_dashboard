@@ -25,6 +25,8 @@ read_latest <- function() {
 
   dt <- readRDS(archives[which.max(dates)])
   dt <- data.frame(dt)
+
+  dt <- dplyr::mutate(dt, status_id = dplyr::coalesce(status_id, as.character(id)))
   dt
 }
 
@@ -47,7 +49,7 @@ if (!file.exists(outfile)) {
   #   -mentions_user_id,
   #   -hashtags)
 
-  dt2$quoted_status_id <- as.character(dt2$quoted_status_id) 
+  dt2$quoted_status_id <- as.character(dt2$quoted_status_id)
   res <- dplyr::bind_rows(dt2, dt)
 
   saveRDS(res, outfile)
