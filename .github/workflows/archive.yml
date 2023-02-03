@@ -29,9 +29,12 @@ jobs:
           git add -A
           git commit -m "Updated data" || exit 0
           git push
+
       - name: Render data table
+        if: always()
         run: Rscript -e "rmarkdown::render('index.Rmd')"
       - name: Commit and push if changed
+        if: always()
         run: |-
           git diff
           git config --global user.email "readme-bot@example.com"

@@ -36,6 +36,12 @@ read_latest <- function(){
 
 dt <- read_latest()
 
+# link to tweet if no api-returned url
+url_pattern <- "http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+urls_extracted <- lapply(dt$full_text, function(x) str_extract(x, url_pattern))
+dt$urls_expanded_url[sapply(dt$urls_expanded_url, is.null)] <- NA
+dt$urls_expanded_url <- coalesce(dt$urls_expanded_url, urls_extracted)[1000]
+
 dt$created_at <- strptime(as.POSIXct(dt$created_at), format = "%Y-%m-%d")
 
 createLink <- function(x) {
