@@ -39,10 +39,17 @@ if (!file.exists(outfile)) {
     order(jjstache_likes$created_at, decreasing = TRUE), ]
 
   dt <- read_latest()
-  i_archive_start <- ifelse( # in case i == 1 has been deleted (#6)
-    length(which(jjstache_likes$id_str == dt[1, "status_id"])) == 0,
-    which(jjstache_likes$id_str == dt[2, "status_id"]),
-    which(jjstache_likes$id_str == dt[1, "status_id"]))
+
+  i_archive_start <- NA
+  i <- 1
+  while (is.na(i_archive_start)) {
+    i_archive_start <- ifelse( # in case i == 1 has been deleted (#6)
+      length(which(jjstache_likes$id_str == dt[i, "status_id"])) == 0,
+      which(jjstache_likes$id_str == dt[i + 1, "status_id"]),
+      which(jjstache_likes$id_str == dt[i, "status_id"]))
+    i <- i + 1
+  }
+
   dt2 <- jjstache_likes[1:i_archive_start, ]
 
   # dt2 <- dplyr::select(dt2, -media_url, -mentions_screen_name,
