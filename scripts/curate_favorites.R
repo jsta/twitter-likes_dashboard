@@ -3,7 +3,7 @@ library(dplyr)
 library(progress)
 
 rtweet::auth_setup_default()
-user <- "_juliejane"
+user <- ""
 
 # a tweet id posted at a target date
 # old_tweet_id <- "1273262315677396994"
@@ -23,9 +23,7 @@ test <- dt %>%
 hist(test$n)
 head(test, n = 20)
 
-bad_accounts <- c("ReclaimMSU", "AOC", "BernieSanders", "reallifecomics",
-                  "GradEmpUnion", "GravelInstitute", "People4Bernie", "_pem_pem",
-                  "itsbirdemic", "JuniperLSimonis")
+bad_accounts <- c()
 
 dt <- dt %>%
   dplyr::filter(n <= 6 | screen_name %in% bad_accounts)
