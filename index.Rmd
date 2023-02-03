@@ -54,7 +54,6 @@ create_link <- function(x) {
   }
 }
 
-dt$urls_expanded_url[1]
 dt$urls_expanded_url <- lapply(dt$urls_expanded_url, function(x) sapply(x, create_link))
 
 other_url_rows <- unlist(lapply(dt$urls_expanded_url, function(x) {
