@@ -46,7 +46,7 @@ dt$urls_expanded_url <- coalesce(dt$urls_expanded_url, urls_extracted)
 
 dt$created_at <- strptime(as.POSIXct(dt$created_at), format = "%Y-%m-%d")
 
-createLink <- function(x) {
+create_link <- function(x) {
   if (is.na(x)) {
     return("")
   } else {
@@ -54,7 +54,8 @@ createLink <- function(x) {
   }
 }
 
-dt$urls_expanded_url <- lapply(dt$urls_expanded_url, function(x) sapply(x, createLink))
+dt$urls_expanded_url[1]
+dt$urls_expanded_url <- lapply(dt$urls_expanded_url, function(x) sapply(x, create_link))
 
 other_url_rows <- unlist(lapply(dt$urls_expanded_url, function(x) {
   length(x) < 1
@@ -62,7 +63,7 @@ other_url_rows <- unlist(lapply(dt$urls_expanded_url, function(x) {
   !is.na(dt$urls_expanded)
 
 dt$urls_expanded_url[other_url_rows] <- lapply(dt$urls_expanded[other_url_rows],
-  function(x) sapply(x[[1]], createLink))
+  function(x) sapply(x[[1]], create_link))
 
 dt$created_at <- format(dt$created_at, "%Y-%m-%d")
 
