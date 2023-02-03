@@ -10,6 +10,7 @@ output:
 ```{r setup, include=FALSE}
 library(DT)
 library(dplyr)
+library(stringr)
 ```
 
 
